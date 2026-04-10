@@ -1,0 +1,47 @@
+@import 'glowing/dist/index.css';
+
+.apple-glowing-wrapper {
+  isolation: isolate;
+  overflow: visible;
+  transition: opacity 180ms ease;
+}
+
+.apple-glowing-wrapper[data-state='hidden'] {
+  opacity: 0 !important;
+}
+
+.apple-glowing-wrapper[data-state='visible'] {
+  opacity: 1;
+  visibility: visible;
+}
+
+.apple-viewport-glow {
+  inset: var(--apple-glow-inset, -2px) !important;
+  border-radius: var(--apple-glow-radius, 0px) !important;
+}
+
+.apple-three-viewport-glow {
+  position: fixed;
+  inset: var(--apple-glow-inset, -2px);
+  pointer-events: none;
+  isolation: isolate;
+  overflow: hidden;
+  border-radius: var(--apple-glow-radius, 0px);
+  opacity: 1;
+  transition: opacity 180ms ease;
+}
+
+.apple-three-viewport-glow[data-boost-state='active'] {
+  opacity: 1;
+}
+
+.apple-three-viewport-glow[data-boost-state='idle'] {
+  opacity: 0.98;
+}
+
+.apple-three-viewport-glow__canvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+  filter: none;
+}

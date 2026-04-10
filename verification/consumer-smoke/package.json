@@ -1,0 +1,15 @@
+{
+  "name": "consumer-smoke",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vite --host 127.0.0.1 --port 4173",
+    "build": "vite build"
+  },
+  "dependencies": {
+    "apple-intelligence-glow-ui": "file:../artifacts/apple-intelligence-glow-ui-smoke.tgz"
+  },
+  "devDependencies": {
+    "vite": "^7.1.10"
+  }
+}

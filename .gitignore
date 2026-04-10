@@ -1,0 +1,9 @@
+node_modules
+dist
+coverage
+.vite
+.DS_Store
+*.log
+verification/artifacts/*.tgz
+verification/artifacts/*.png
+verification/consumer-smoke/bun.lock
