@@ -1,6 +1,6 @@
 {
   "name": "intelligence-glow",
-  "version": "0.2.0",
+  "version": "0.1.0",
   "description": "Ambient viewport glow effects with glowing and Three.js renderers.",
   "license": "MIT",
   "keywords": [
