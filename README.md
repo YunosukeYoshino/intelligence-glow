@@ -1,6 +1,7 @@
 # apple-intelligence-glow-ui
 
 [![npm version](https://img.shields.io/npm/v/apple-intelligence-glow-ui)](https://www.npmjs.com/package/apple-intelligence-glow-ui)
+[![CI](https://github.com/YunosukeYoshino/apple-intelligence-glow-ui/actions/workflows/ci.yml/badge.svg)](https://github.com/YunosukeYoshino/apple-intelligence-glow-ui/actions/workflows/ci.yml)
 [![license](https://img.shields.io/npm/l/apple-intelligence-glow-ui)](LICENSE)
 [![types](https://img.shields.io/npm/types/apple-intelligence-glow-ui)](https://www.npmjs.com/package/apple-intelligence-glow-ui)
 
@@ -192,13 +193,24 @@ if (typeof window !== 'undefined') {
 > [!NOTE]
 > `build:lib` is a composite step: `vite build --mode lib && tsc -p tsconfig.build.json && bun ./scripts/prepare-package.mjs`. Do not skip any step manually.
 
-## Release Checklist
+Formatting and linting use [Biome](https://biomejs.dev):
 
-Before publishing a new version:
+```bash
+bunx biome check --write .
+```
 
-- [ ] `bun run check` passes with no errors
-- [ ] `bun run test` passes with no skipped tests
-- [ ] `bun run build:lib` completes without warnings
-- [ ] `bun run smoke:pack` prints `smoke-pack ok`
-- [ ] Version bumped in `package.json`
-- [ ] Changelog updated
+## Release
+
+Releases are automated via GitHub Actions. Push a version tag to publish to npm:
+
+```bash
+# Bump version in package.json first, then:
+git add package.json
+git commit -m "chore: bump version to x.y.z"
+git tag vx.y.z
+git push origin main && git push origin vx.y.z
+```
+
+The [release workflow](.github/workflows/release.yml) runs `prepublishOnly` and publishes to npm automatically. Requires `NPM_TOKEN` to be set in repository secrets.
+
+CI runs on every push and pull request to `main` — check type, test, build, and smoke-pack must all pass.
