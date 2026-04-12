@@ -2,8 +2,8 @@
 
 [![npm version](https://img.shields.io/npm/v/apple-intelligence-glow-ui)](https://www.npmjs.com/package/apple-intelligence-glow-ui)
 [![CI](https://github.com/YunosukeYoshino/apple-intelligence-glow-ui/actions/workflows/ci.yml/badge.svg)](https://github.com/YunosukeYoshino/apple-intelligence-glow-ui/actions/workflows/ci.yml)
-[![license](https://img.shields.io/npm/l/apple-intelligence-glow-ui)](LICENSE)
-[![types](https://img.shields.io/npm/types/apple-intelligence-glow-ui)](https://www.npmjs.com/package/apple-intelligence-glow-ui)
+[![license](https://img.shields.io/github/license/YunosukeYoshino/apple-intelligence-glow-ui)](LICENSE)
+[![types](https://img.shields.io/badge/types-TypeScript-3178c6)](https://www.typescriptlang.org/)
 
 Ambient viewport glow effects inspired by Apple Intelligence — a rotating, corner-hugging color gradient that wraps the browser viewport. Vanilla TypeScript with no framework dependency. Two renderers: a lightweight CSS-blend `glowing` renderer and a WebGL Three.js aurora renderer.
 
