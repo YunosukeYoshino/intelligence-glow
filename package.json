@@ -9,13 +9,13 @@
     "threejs",
     "typescript"
   ],
-  "homepage": "https://github.com/YunosukeYoshino/apple-intelligence-glow-ui#readme",
+  "homepage": "https://github.com/YunosukeYoshino/intelligence-glow#readme",
   "bugs": {
-    "url": "https://github.com/YunosukeYoshino/apple-intelligence-glow-ui/issues"
+    "url": "https://github.com/YunosukeYoshino/intelligence-glow/issues"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/YunosukeYoshino/apple-intelligence-glow-ui.git"
+    "url": "git+https://github.com/YunosukeYoshino/intelligence-glow.git"
   },
   "type": "module",
   "main": "./dist/lib/index.js",

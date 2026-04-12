@@ -78,14 +78,14 @@ describe('package contract', () => {
 
     expect(packageJson.license).toBe('MIT')
     expect(packageJson.homepage).toBe(
-      'https://github.com/YunosukeYoshino/apple-intelligence-glow-ui#readme',
+      'https://github.com/YunosukeYoshino/intelligence-glow#readme',
     )
     expect(packageJson.bugs?.url).toBe(
-      'https://github.com/YunosukeYoshino/apple-intelligence-glow-ui/issues',
+      'https://github.com/YunosukeYoshino/intelligence-glow/issues',
     )
     expect(packageJson.repository).toEqual({
       type: 'git',
-      url: 'git+https://github.com/YunosukeYoshino/apple-intelligence-glow-ui.git',
+      url: 'git+https://github.com/YunosukeYoshino/intelligence-glow.git',
     })
   })
 })
