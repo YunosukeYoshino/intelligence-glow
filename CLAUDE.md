@@ -51,4 +51,16 @@ Biome is used for formatting and linting. Run `bunx biome check --write .` to fo
 
 ## Release
 
-Release is automated via GitHub Actions (CI/CD setup in progress). Before any publish, run `bun run prepublishOnly` locally to confirm all checks pass.
+Release is automated via GitHub Actions. Push a version tag to trigger publish:
+
+```bash
+# Bump version in package.json, then:
+git add package.json && git commit -m "chore: bump version to x.y.z"
+git tag vx.y.z && git push origin main && git push origin vx.y.z
+```
+
+The release workflow runs `bun run prepublishOnly` (check → test → build → smoke) then `npm publish`.
+
+**Required:** `NPM_TOKEN` in GitHub repository secrets must be an **Automation** type token (not Classic or Granular). Automation tokens bypass 2FA for CI. Generate one at npmjs.com → Account → Access Tokens → Classic Token → Automation.
+
+Set it with: `gh secret set NPM_TOKEN --repo YunosukeYoshino/apple-intelligence-glow-ui`
