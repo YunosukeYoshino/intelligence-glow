@@ -11,7 +11,6 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: read
-      id-token: write
     steps:
       - uses: actions/checkout@v4
 
@@ -25,7 +24,10 @@ jobs:
       - name: Full pre-publish validation
         run: bun run prepublishOnly
 
-      - name: Publish to npm
-        run: bun publish --access public
+      - name: Configure npm auth
+        run: echo "//registry.npmjs.org/:_authToken=${NPM_TOKEN}" > ~/.npmrc
         env:
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+      - name: Publish to npm
+        run: bun publish --access public
