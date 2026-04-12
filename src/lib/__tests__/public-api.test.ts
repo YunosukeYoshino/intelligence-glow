@@ -1,9 +1,6 @@
 import { afterEach, describe, expect, test, vi } from 'vitest'
 
-const browserGlobals = [
-  'document',
-  'window',
-] as const
+const browserGlobals = ['document', 'window'] as const
 
 function removeBrowserGlobals() {
   for (const key of browserGlobals) {
@@ -21,7 +18,7 @@ describe('public browser-only API guards', () => {
     const { attachViewportGlow } = await import('../viewport-glow')
 
     expect(() => attachViewportGlow()).toThrowError(
-      'apple-intelligence-glow-ui requires a browser environment with window and document.',
+      'intelligence-glow requires a browser environment with window and document.',
     )
   })
 
@@ -30,7 +27,7 @@ describe('public browser-only API guards', () => {
     const { attachGlowingViewportGlow } = await import('../glowing/controller')
 
     expect(() => attachGlowingViewportGlow()).toThrowError(
-      'apple-intelligence-glow-ui requires a browser environment with window and document.',
+      'intelligence-glow requires a browser environment with window and document.',
     )
   })
 
@@ -39,7 +36,7 @@ describe('public browser-only API guards', () => {
     const { attachThreeViewportGlow } = await import('../three')
 
     expect(() => attachThreeViewportGlow()).toThrowError(
-      'apple-intelligence-glow-ui requires a browser environment with window and document.',
+      'intelligence-glow requires a browser environment with window and document.',
     )
   })
 })

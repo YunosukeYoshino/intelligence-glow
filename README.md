@@ -1,11 +1,11 @@
-# apple-intelligence-glow-ui
+# intelligence-glow
 
-[![npm version](https://img.shields.io/npm/v/apple-intelligence-glow-ui)](https://www.npmjs.com/package/apple-intelligence-glow-ui)
+[![npm version](https://img.shields.io/npm/v/intelligence-glow)](https://www.npmjs.com/package/intelligence-glow)
 [![CI](https://github.com/YunosukeYoshino/apple-intelligence-glow-ui/actions/workflows/ci.yml/badge.svg)](https://github.com/YunosukeYoshino/apple-intelligence-glow-ui/actions/workflows/ci.yml)
 [![license](https://img.shields.io/github/license/YunosukeYoshino/apple-intelligence-glow-ui)](LICENSE)
 [![types](https://img.shields.io/badge/types-TypeScript-3178c6)](https://www.typescriptlang.org/)
 
-Ambient viewport glow effects inspired by Apple Intelligence — a rotating, corner-hugging color gradient that wraps the browser viewport. Vanilla TypeScript with no framework dependency. Two renderers: a lightweight CSS-blend `glowing` renderer and a WebGL Three.js aurora renderer.
+Ambient viewport glow effects — a rotating, corner-hugging color gradient that wraps the browser viewport. Vanilla TypeScript with no framework dependency. Two renderers: a lightweight CSS-blend `glowing` renderer and a WebGL Three.js aurora renderer.
 
 ## Features
 
@@ -19,11 +19,21 @@ Ambient viewport glow effects inspired by Apple Intelligence — a rotating, cor
 ## Installation
 
 ```bash
-bun add apple-intelligence-glow-ui
+bun add intelligence-glow
 ```
 
 ```bash
-npm install apple-intelligence-glow-ui
+npm install intelligence-glow
+```
+
+```bash
+pnpm add intelligence-glow
+```
+
+If you use the `three` renderer, install Three.js alongside it:
+
+```bash
+bun add intelligence-glow three
 ```
 
 ## Quick Start
@@ -31,8 +41,8 @@ npm install apple-intelligence-glow-ui
 Import the stylesheet once, then call `attachViewportGlow()`:
 
 ```ts
-import 'apple-intelligence-glow-ui/style.css'
-import { attachViewportGlow } from 'apple-intelligence-glow-ui'
+import 'intelligence-glow/style.css'
+import { attachViewportGlow } from 'intelligence-glow'
 
 const glow = attachViewportGlow({
   active: true,
@@ -60,7 +70,7 @@ window.addEventListener('beforeunload', () => glow.destroy())
 The function returns a controller immediately. Call `glow.show()` / `glow.hide()` in response to user actions, or call `glow.setActive(true)` to keep it on continuously.
 
 > [!TIP]
-> Start by tuning only `colors` and `colors2`. The defaults for everything else are calibrated to match the original Apple Intelligence feel.
+> Start by tuning only `colors` and `colors2`. The defaults for everything else are calibrated for a calm, perimeter-hugging feel.
 
 ## Renderers
 
@@ -69,8 +79,8 @@ The function returns a controller immediately. Call `glow.show()` / `glow.hide()
 Uses the [`glowing`](https://www.npmjs.com/package/glowing) package, which paints a rotating conic gradient onto the viewport edge using CSS blend modes. It is the lightest option and degrades gracefully on older browsers.
 
 ```ts
-import 'apple-intelligence-glow-ui/style.css'
-import { attachViewportGlow } from 'apple-intelligence-glow-ui'
+import 'intelligence-glow/style.css'
+import { attachViewportGlow } from 'intelligence-glow'
 
 const glow = attachViewportGlow({ active: true })
 ```
@@ -79,9 +89,12 @@ const glow = attachViewportGlow({ active: true })
 
 Uses Three.js and a custom GLSL shader to paint an aurora that stays on the perimeter and briefly boosts intensity whenever `show()` is called. Import it from the dedicated entry point to avoid pulling Three.js into your main bundle.
 
+> [!NOTE]
+> `three` is a peer dependency — install it yourself: `bun add three` / `npm install three`.
+
 ```ts
-import 'apple-intelligence-glow-ui/style.css'
-import { attachThreeViewportGlow } from 'apple-intelligence-glow-ui/three'
+import 'intelligence-glow/style.css'
+import { attachThreeViewportGlow } from 'intelligence-glow/three'
 
 const glow = attachThreeViewportGlow({
   active: true,
@@ -104,7 +117,7 @@ const glow = attachThreeViewportGlow({
 ```
 
 > [!IMPORTANT]
-> The root entry (`apple-intelligence-glow-ui`) never re-exports anything from Three.js. If you need to verify this invariant after touching either index file, run `bun run smoke:pack`.
+> The root entry (`intelligence-glow`) never re-exports anything from Three.js. If you need to verify this invariant after touching either index file, run `bun run smoke:pack`.
 
 ## API Reference
 
@@ -151,11 +164,11 @@ type ViewportGlowController<TOptions> = {
 ### Exports
 
 ```ts
-// Root entry — apple-intelligence-glow-ui
+// Root entry — intelligence-glow
 export { attachViewportGlow, attachGlowingViewportGlow, Glowing }
 export type { ViewportGlowOptions, ViewportGlowController, ViewportGlowBlendMode, GlowingOptions, GlowingBlendMode }
 
-// Three entry — apple-intelligence-glow-ui/three
+// Three entry — intelligence-glow/three
 export { attachThreeViewportGlow }
 export type { ThreeViewportGlowOptions, ThreeViewportGlowController }
 ```
@@ -165,7 +178,7 @@ export type { ThreeViewportGlowOptions, ThreeViewportGlowController }
 This package requires `window` and `document`. It throws at runtime in Node.js or any SSR context. Initialise it conditionally when targeting SSR frameworks:
 
 ```ts
-import { attachViewportGlow } from 'apple-intelligence-glow-ui'
+import { attachViewportGlow } from 'intelligence-glow'
 
 if (typeof window !== 'undefined') {
   const glow = attachViewportGlow({ active: true })

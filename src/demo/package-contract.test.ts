@@ -11,6 +11,8 @@ type PackageJson = {
   license?: string
   main?: string
   module?: string
+  peerDependencies?: Record<string, string>
+  peerDependenciesMeta?: Record<string, { optional?: boolean }>
   private?: boolean
   repository?: { type?: string; url?: string }
   scripts?: Record<string, string>
@@ -62,7 +64,12 @@ describe('package contract', () => {
 
     expect(packageJson.dependencies).toEqual({
       glowing: expect.any(String),
+    })
+    expect(packageJson.peerDependencies).toEqual({
       three: expect.any(String),
+    })
+    expect(packageJson.peerDependenciesMeta).toEqual({
+      three: { optional: true },
     })
   })
 

@@ -1,6 +1,6 @@
 import './styles.css'
-import 'apple-intelligence-glow-ui/style.css'
-import { attachViewportGlow } from 'apple-intelligence-glow-ui'
+import 'intelligence-glow/style.css'
+import { attachViewportGlow } from 'intelligence-glow'
 
 const APPLE_COLORS = [
   '#ff7db8',

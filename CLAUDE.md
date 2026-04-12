@@ -25,9 +25,9 @@ Always use `bun` — never npm or yarn.
 The root export (`.`) must NOT include the Three.js renderer. Three.js is only accessible via the `./three` entry point. This separation is enforced by `smoke:pack` — always run it after changing `src/lib/index.ts` or `src/lib/three/index.ts`.
 
 ```
-import { attachViewportGlow } from 'apple-intelligence-glow-ui'         // ok
-import { attachThreeViewportGlow } from 'apple-intelligence-glow-ui/three' // ok
-import { attachThreeViewportGlow } from 'apple-intelligence-glow-ui'    // breaks smoke:pack
+import { attachViewportGlow } from 'intelligence-glow'         // ok
+import { attachThreeViewportGlow } from 'intelligence-glow/three' // ok
+import { attachThreeViewportGlow } from 'intelligence-glow'    // breaks smoke:pack
 ```
 
 ## Browser-Only Library
@@ -63,4 +63,4 @@ The release workflow runs `bun run prepublishOnly` (check → test → build →
 
 **Required:** `NPM_TOKEN` in GitHub repository secrets must be an **Automation** type token (not Classic or Granular). Automation tokens bypass 2FA for CI. Generate one at npmjs.com → Account → Access Tokens → Classic Token → Automation.
 
-Set it with: `gh secret set NPM_TOKEN --repo YunosukeYoshino/apple-intelligence-glow-ui`
+Set it with: `gh secret set NPM_TOKEN --repo YunosukeYoshino/intelligence-glow`

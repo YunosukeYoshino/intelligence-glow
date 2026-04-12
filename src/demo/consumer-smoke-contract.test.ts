@@ -10,13 +10,13 @@ const consumerMainSource = readFileSync(
 describe('consumer smoke fixture', () => {
   test('uses viewport glow only and keeps the demo preset calm', () => {
     expect(consumerMainSource).toContain(
-      "import { attachViewportGlow } from 'apple-intelligence-glow-ui'",
+      "import { attachViewportGlow } from 'intelligence-glow'",
     )
     expect(consumerMainSource).not.toContain('new Glowing')
     expect(consumerMainSource).not.toContain('data-toggle-card')
     expect(consumerMainSource).toContain('const APPLE_COLORS = [')
     expect(consumerMainSource).toContain('const APPLE_COLORS_2 = [')
-    expect(consumerMainSource).toContain("inset: -2")
+    expect(consumerMainSource).toContain('inset: -2')
     expect(consumerMainSource).toContain("radius: '0px'")
     expect(consumerMainSource).toContain('rotationDuration: 1800')
     expect(consumerMainSource).toContain('width: 9')

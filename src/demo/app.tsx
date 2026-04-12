@@ -1,8 +1,6 @@
 import { SparklesIcon } from 'lucide-react'
 import { useEffect, useMemo, useRef, useState } from 'react'
-import {
-  attachViewportGlow,
-} from '../lib'
+import { attachViewportGlow } from '../lib'
 import { attachThreeViewportGlow } from '../lib/three'
 import { Button } from './components/ui/button'
 import { Card } from './components/ui/card'
@@ -43,15 +41,15 @@ const THREE_RENDERER_PRESET = {
 type DemoRenderer = 'glowing' | 'three'
 
 function getRendererPreset(renderer: DemoRenderer) {
-  return renderer === 'three'
-    ? THREE_RENDERER_PRESET
-    : GLOWING_RENDERER_PRESET
+  return renderer === 'three' ? THREE_RENDERER_PRESET : GLOWING_RENDERER_PRESET
 }
 
 export function App() {
   const initialPreset = getRendererPreset('glowing')
   const controllerRef = useRef<
-    ReturnType<typeof attachViewportGlow> | ReturnType<typeof attachThreeViewportGlow> | null
+    | ReturnType<typeof attachViewportGlow>
+    | ReturnType<typeof attachThreeViewportGlow>
+    | null
   >(null)
   const flashHideTimerRef = useRef<number | null>(null)
   const [active, setActive] = useState(true)
@@ -97,7 +95,15 @@ export function App() {
       controller.destroy()
       controllerRef.current = null
     }
-  }, [active, inset, minimumVisibleMs, radius, renderer, rotationDuration, width])
+  }, [
+    active,
+    inset,
+    minimumVisibleMs,
+    radius,
+    renderer,
+    rotationDuration,
+    width,
+  ])
 
   useEffect(() => {
     return () => {
@@ -127,11 +133,14 @@ export function App() {
     controllerRef.current?.show()
     setActive(true)
 
-    flashHideTimerRef.current = window.setTimeout(() => {
-      controllerRef.current?.hide()
-      setActive(false)
-      flashHideTimerRef.current = null
-    }, Math.max(minimumVisibleMs + 260, 900))
+    flashHideTimerRef.current = window.setTimeout(
+      () => {
+        controllerRef.current?.hide()
+        setActive(false)
+        flashHideTimerRef.current = null
+      },
+      Math.max(minimumVisibleMs + 260, 900),
+    )
   }
 
   const toggleGlow = () => {
@@ -239,7 +248,9 @@ export function App() {
                   className="accent-neutral-900"
                   max={12}
                   min={4}
-                  onChange={(event) => setWidth(Number(event.currentTarget.value))}
+                  onChange={(event) =>
+                    setWidth(Number(event.currentTarget.value))
+                  }
                   type="range"
                   value={width}
                 />
@@ -250,7 +261,9 @@ export function App() {
                   className="accent-neutral-900"
                   max={-2}
                   min={-8}
-                  onChange={(event) => setInset(Number(event.currentTarget.value))}
+                  onChange={(event) =>
+                    setInset(Number(event.currentTarget.value))
+                  }
                   type="range"
                   value={inset}
                 />
@@ -261,7 +274,9 @@ export function App() {
                   className="accent-neutral-900"
                   max={40}
                   min={0}
-                  onChange={(event) => setRadius(Number(event.currentTarget.value))}
+                  onChange={(event) =>
+                    setRadius(Number(event.currentTarget.value))
+                  }
                   type="range"
                   value={radius}
                 />
@@ -313,7 +328,7 @@ export function App() {
               <code className="mt-2 block rounded-xl bg-black/[0.04] px-3 py-2 text-[13px] text-neutral-900">
                 {renderer === 'glowing'
                   ? 'attachViewportGlow(options)'
-                  : "import { attachThreeViewportGlow } from 'apple-intelligence-glow-ui/three'"}
+                  : "import { attachThreeViewportGlow } from 'intelligence-glow/three'"}
               </code>
             </div>
           </Card>

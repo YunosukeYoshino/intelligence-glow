@@ -7,7 +7,7 @@
     "build": "vite build"
   },
   "dependencies": {
-    "apple-intelligence-glow-ui": "file:../artifacts/apple-intelligence-glow-ui-smoke.tgz"
+    "intelligence-glow": "file:../artifacts/intelligence-glow-smoke.tgz"
   },
   "devDependencies": {
     "vite": "^7.1.10"

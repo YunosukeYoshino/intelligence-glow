@@ -1,6 +1,6 @@
 {
-  "name": "apple-intelligence-glow-ui",
-  "version": "0.1.0",
+  "name": "intelligence-glow",
+  "version": "0.2.0",
   "description": "Ambient viewport glow effects with glowing and Three.js renderers.",
   "license": "MIT",
   "keywords": [
@@ -51,8 +51,15 @@
     "**/*.css"
   ],
   "dependencies": {
-    "glowing": "^0.2.3",
+    "glowing": "^0.2.3"
+  },
+  "peerDependencies": {
     "three": "^0.183.2"
+  },
+  "peerDependenciesMeta": {
+    "three": {
+      "optional": true
+    }
   },
   "devDependencies": {
     "@biomejs/biome": "^2.4.11",

@@ -1,4 +1,11 @@
-import { mkdir, mkdtemp, readFile, rename, symlink, writeFile } from 'node:fs/promises'
+import {
+  mkdir,
+  mkdtemp,
+  readFile,
+  rename,
+  symlink,
+  writeFile,
+} from 'node:fs/promises'
 import { spawnSync } from 'node:child_process'
 import { dirname, join, resolve } from 'node:path'
 import { fileURLToPath } from 'node:url'
@@ -24,11 +31,14 @@ function run(command, args, cwd) {
     return result
   }
 
-  const output = [result.stdout, result.stderr].filter(Boolean).join('\n').trim()
+  const output = [result.stdout, result.stderr]
+    .filter(Boolean)
+    .join('\n')
+    .trim()
   throw new Error(output || `Command failed: ${command} ${args.join(' ')}`)
 }
 
-const scratchRoot = await mkdtemp(join(tmpdir(), 'apple-intelligence-glow-ui-'))
+const scratchRoot = await mkdtemp(join(tmpdir(), `${packageJson.name}-`))
 const tarballDir = join(scratchRoot, 'tarball')
 const consumerDir = join(scratchRoot, 'consumer')
 const consumerNodeModulesDir = join(consumerDir, 'node_modules')
@@ -41,17 +51,7 @@ await mkdir(consumerDir, { recursive: true })
 await mkdir(consumerNodeModulesDir, { recursive: true })
 await mkdir(unpackDir, { recursive: true })
 
-run(
-  bunBin,
-  [
-    'pm',
-    'pack',
-    '--quiet',
-    '--destination',
-    tarballDir,
-  ],
-  projectRoot,
-)
+run(bunBin, ['pm', 'pack', '--quiet', '--destination', tarballDir], projectRoot)
 
 const tarballPath = join(tarballDir, tarballBaseName)
 const packageDir = join(consumerNodeModulesDir, packageJson.name)
@@ -60,7 +60,7 @@ await writeFile(
   join(consumerDir, 'package.json'),
   JSON.stringify(
     {
-      name: 'apple-intelligence-glow-ui-smoke',
+      name: `${packageJson.name}-smoke`,
       private: true,
       type: 'module',
     },
@@ -71,8 +71,14 @@ await writeFile(
 
 run('/usr/bin/tar', ['-xzf', tarballPath, '-C', unpackDir], projectRoot)
 await rename(join(unpackDir, 'package'), packageDir)
-await symlink(resolve(projectRoot, 'node_modules/glowing'), join(consumerNodeModulesDir, 'glowing'))
-await symlink(resolve(projectRoot, 'node_modules/three'), join(consumerNodeModulesDir, 'three'))
+await symlink(
+  resolve(projectRoot, 'node_modules/glowing'),
+  join(consumerNodeModulesDir, 'glowing'),
+)
+await symlink(
+  resolve(projectRoot, 'node_modules/three'),
+  join(consumerNodeModulesDir, 'three'),
+)
 
 await writeFile(
   join(consumerDir, 'main.mjs'),
@@ -80,10 +86,10 @@ await writeFile(
     "import assert from 'node:assert/strict'",
     "import { createRequire } from 'node:module'",
     '',
-    "const lib = await import('apple-intelligence-glow-ui')",
-    "const threeLib = await import('apple-intelligence-glow-ui/three')",
+    `const lib = await import('${packageJson.name}')`,
+    `const threeLib = await import('${packageJson.name}/three')`,
     'const require = createRequire(import.meta.url)',
-    "const stylePath = require.resolve('apple-intelligence-glow-ui/style.css')",
+    `const stylePath = require.resolve('${packageJson.name}/style.css')`,
     '',
     "assert.equal(typeof lib.attachViewportGlow, 'function')",
     "assert.equal(typeof lib.attachGlowingViewportGlow, 'function')",
